@@ -2,10 +2,7 @@ package org.example.facturas;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
 public class GeneradorFacturas {
     private final Scanner scanner;
@@ -48,8 +45,9 @@ public class GeneradorFacturas {
         if (!file.exists()) {
             file.mkdirs();
         }
-        int length = Objects.requireNonNull(file.listFiles()).length;
-        file = new File(file + "/factura" + (length + 1));
+        //int length = Objects.requireNonNull(file.listFiles()).length;
+        int length= Arrays.stream(file.listFiles()).filter(file1 -> file1.getName().contains("factura")).toArray().length;
+        file = new File(file + "/factura" + (length + 1)+".txt");
 
         try (
                 FileOutputStream fos = new FileOutputStream(file, false);
