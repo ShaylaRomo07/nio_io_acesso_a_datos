@@ -23,8 +23,9 @@ public class Ex2 {
         double salario;
         double salarioNew;
         double salarioOld;
+        long pos = 0;
         try (
-                RandomAccessFile raf = new RandomAccessFile(file, "rws");
+                RandomAccessFile raf = new RandomAccessFile(file, "rwd");
 
         ) {
             raf.seek(36 * (id1 - 1));
@@ -35,9 +36,12 @@ public class Ex2 {
             }
             String apellidos = new String(apellido);
             departamento = raf.readInt();
+            pos = raf.getFilePointer();
             salarioOld = raf.readDouble();
             salarioNew = salarioOld + importe;
+            raf.seek(pos);
             raf.writeDouble(salarioNew);
+            raf.seek(pos);
             salario = raf.readDouble();
 
             if (id1 == id2) {
