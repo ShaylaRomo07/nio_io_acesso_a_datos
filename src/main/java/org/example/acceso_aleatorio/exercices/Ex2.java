@@ -14,18 +14,18 @@ public class Ex2 {
         System.out.println("Introduce ID del empleado:");
         int id1 = scanner.nextInt();
         System.out.println("Introduce el importe añadido:");
-        double importe = scanner.nextInt();
+        double importe = scanner.nextDouble();
 
         File file = new File("aleatorio/AleatorioEmple.dat");
         int departamento;
-        char apellido[] = new char[10];
+        char[] apellido = new char[10];
         char letra;
         double salario;
         double salarioNew;
         double salarioOld;
         long pos = 0;
         try (
-                RandomAccessFile raf = new RandomAccessFile(file, "rwd");
+                RandomAccessFile raf = new RandomAccessFile(file, "rw");
 
         ) {
             raf.seek(36 * (id1 - 1));
